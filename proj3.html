@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Password Generator</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: #e578f3;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .container {
+        background: aqua;
+        padding: 35px;
+        width: 400px;
+        border-radius: 200px;
+        text-align: center;
+      }
+
+      .container h3 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .container input {
+        width: 100%;
+        padding: 08px;
+        border: none;
+        outline: none;
+        border-radius: 15px;
+        margin-bottom: 20px;
+      }
+
+      .container button {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        outline: none;
+        border-radius: 15px;
+        background: #78c1f3;
+        color: #ffffff;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h3>Generate a Strong Password</h3>
+      <input type="text" id="password" readonly />
+      <button id="generate">Generate Password</button>
+    </div>
+    <script>
+      const generate = document.getElementById("generate");
+      const password = document.getElementById("password");
+
+      const lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
+      const upperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      const numbers = "0123456789";
+      const symbols = "!@#$%^&*()_+-=[]{}|;:,.<>?/~";
+
+      generate.addEventListener("click", () => {
+        const length = 12;
+        let value = "";
+        value +=
+          lowerCaseLetters[
+            Math.floor(Math.random() * lowerCaseLetters.length)
+          ];
+        value +=
+          upperCaseLetters[
+            Math.floor(Math.random() * upperCaseLetters.length)
+          ];
+        value += numbers[Math.floor(Math.random() * numbers.length)];
+        value += symbols[Math.floor(Math.random() * symbols.length)];
+
+        for (let i = 4; i < length; i++) {
+          const random = Math.floor(Math.random() * 4);
+          switch (random) {
+            case 0:
+              value +=
+                lowerCaseLetters[
+                  Math.floor(Math.random() * lowerCaseLetters.length)
+                ];
+              break;
+            case 1:
+              value +=
+                upperCaseLetters[
+                  Math.floor(Math.random() * upperCaseLetters.length)
+                ];
+              break;
+            case 2:
+              value += numbers[Math.floor(Math.random() * numbers.length)];
+              break;
+            case 3:
+              value += symbols[Math.floor(Math.random() * symbols.length)];
+              break;
+          }
+        }
+
+        password.value = value;
+      });
+    </script>
+  </body>
+</html>
